@@ -1,7 +1,7 @@
 NAME_SERVER = server
 NAME_CLIENT = client
 
-CFLAGS = -g3 -fsanitize=address -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror
 CC = gcc
 RM = rm -f
 

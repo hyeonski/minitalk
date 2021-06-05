@@ -6,7 +6,7 @@
 /*   By: hyeonski <hyeonski@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/05 15:29:12 by hyeonski          #+#    #+#             */
-/*   Updated: 2021/06/05 21:03:50 by hyeonski         ###   ########.fr       */
+/*   Updated: 2021/06/05 21:52:29 by hyeonski         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void		send_null(pid_t pid)
 		pause();
 		if (g_flag != 0)
 		{
-			ft_putendl_fd("fatal error!", STDOUT_FILENO);
+			ft_putendl_fd("fatal error!", STDERR_FILENO);
 			printf("g_flag: %d\n", g_flag);
 			exit(1);
 		}
@@ -74,7 +74,7 @@ void		send_msg(pid_t pid, char *str)
 			pause();
 			if (g_flag != flag || g_flag == -1)
 			{
-				ft_putendl_fd("fatal error!", STDOUT_FILENO);
+				ft_putendl_fd("fatal error!", STDERR_FILENO);
 				printf("g_flag: %d\n", g_flag);
 				exit(1);
 			}
@@ -89,7 +89,15 @@ void		send_msg(pid_t pid, char *str)
 int		main(int argc, char **argv)
 {
 	if (argc != 3)
+	{
+		ft_putstr_fd("please enter right number of arguments!\n", STDERR_FILENO);
 		return (1);
+	}
+	if (argv[2][0] == '\0')
+	{
+		ft_putstr_fd("please don't enter empty string...\n", STDERR_FILENO);
+		return (1);
+	}
 	ft_putstr_fd("client pid:", STDOUT_FILENO);
 	ft_putnbr_fd(getpid(), STDOUT_FILENO);
 	ft_putchar_fd('\n', STDOUT_FILENO);
