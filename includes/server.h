@@ -1,21 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstadd_front.c                                  :+:      :+:    :+:   */
+/*   server.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hyeonski <hyeonski@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hyeonski <hyeonski@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/10/07 15:29:29 by hyeonski          #+#    #+#             */
-/*   Updated: 2021/02/06 20:42:53 by hyeonseun        ###   ########.fr       */
+/*   Created: 2021/06/05 20:41:59 by hyeonski          #+#    #+#             */
+/*   Updated: 2021/06/05 21:03:35 by hyeonski         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#ifndef SERVER_HPP
+# define SERVER_HPP
 
-void	ft_lstadd_front(t_list **lst, t_list *new)
+# include "utils.h"
+
+typedef struct	s_msg
 {
-	if (lst == NULL || new == NULL)
-		return ;
-	new->next = (*lst);
-	*lst = new;
-}
+	t_list		*msg;
+	char		buf;
+	int			bit_cnt;
+	pid_t		client_pid;
+}				t_msg;
+
+#endif
