@@ -30,7 +30,9 @@ void		signal_handle(int signo)
 
 int			is_bit_set(int idx, char buf)
 {
-	char	mask = 1 << (7 - idx);
+	char	mask;
+
+	mask = 1 << (7 - idx);
 	return ((buf & mask) != 0);
 }
 
@@ -46,7 +48,6 @@ void		send_null(pid_t pid)
 		if (g_flag != 0)
 		{
 			ft_putendl_fd("fatal error!", STDERR_FILENO);
-			printf("g_flag: %d\n", g_flag);
 			exit(1);
 		}
 		i++;
@@ -65,20 +66,16 @@ void		send_msg(pid_t pid, char *str)
 	while (str[i])
 	{
 		buf = str[i];
-		j = 0;
-		while (j < 8)
+		j = -1;
+		while (++j < 8)
 		{
 			flag = is_bit_set(j, buf);
 			usleep(50);
 			kill(pid, flag ? SIGUSR1 : SIGUSR2);
 			pause();
-			if (g_flag != flag || g_flag == -1)
-			{
-				ft_putendl_fd("fatal error!", STDERR_FILENO);
-				printf("g_flag: %d\n", g_flag);
+			if ((flag != g_flag)
+					&& ft_putstr_fd("fatal error!\n", STDERR_FILENO))
 				exit(1);
-			}
-			j++;
 		}
 		i++;
 	}
@@ -86,11 +83,12 @@ void		send_msg(pid_t pid, char *str)
 	ft_putstr_fd("message sent!\n", STDOUT_FILENO);
 }
 
-int		main(int argc, char **argv)
+int			main(int argc, char **argv)
 {
 	if (argc != 3)
 	{
-		ft_putstr_fd("please enter right number of arguments!\n", STDERR_FILENO);
+		ft_putstr_fd("please enter right number of arguments!\n",
+				STDERR_FILENO);
 		return (1);
 	}
 	if (argv[2][0] == '\0')

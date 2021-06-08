@@ -1,5 +1,6 @@
 NAME_SERVER = server
 NAME_CLIENT = client
+NAME = minitalk
 
 CFLAGS = -Wall -Wextra -Werror
 CC = gcc
@@ -33,7 +34,9 @@ OBJS_UTILS = $(SRCS_UTILS:.c=.o)
 OBJ_SERVER = $(SRC_SERVER:.c=.o)
 OBJ_CLIENT = $(SRC_CLIENT:.c=.o)
 
-all : $(NAME_SERVER) $(NAME_CLIENT)
+all : $(NAME)
+
+$(NAME) : $(NAME_SERVER) $(NAME_CLIENT)
 
 $(NAME_SERVER) : $(OBJS_UTILS) $(OBJ_SERVER)
 	$(CC) $(CFLAGS) $(INCLUDES) -o $@ $^

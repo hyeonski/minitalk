@@ -59,7 +59,6 @@ void		print_msg(void)
 		list = list->next;
 	}
 	ft_putstr_fd("]\n", STDOUT_FILENO);
-	
 }
 
 void		signal_handler(int signo)
